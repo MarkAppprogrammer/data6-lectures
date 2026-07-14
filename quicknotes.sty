@@ -1,0 +1,83 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{quicknotes}[2026/06/30 Lightweight lecture-note preamble - Castel style]
+
+% ============================================================
+%  quicknotes.sty  -  fast, self-contained lecture notes
+%  Compiles with pdflatex (no LuaLaTeX needed). Designed for
+%  taking math / CS / physics notes live, in the style of
+%  https://castel.dev/post/lecture-notes-1/
+% ============================================================
+
+% ---- core math ----
+\RequirePackage{amsmath,amssymb,amsthm,mathtools}
+\RequirePackage{geometry}
+\geometry{a4paper,margin=2.2cm}
+\RequirePackage{microtype}
+\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage{enumitem}
+\RequirePackage{graphicx}
+% look for images in the note's own folder, a local figures/ subfolder, or ~/notes/figures
+\graphicspath{{./}{figures/}{../figures/}}
+\RequirePackage{import}     % for figures via inkscape workflow
+\RequirePackage{xifthen}
+\RequirePackage{pdfpages}
+\RequirePackage{transparent}
+\RequirePackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=NavyBlue,citecolor=NavyBlue,urlcolor=NavyBlue}
+
+% ---- nice fonts for screen reading ----
+\RequirePackage{lmodern}
+
+% ---- icons (magnifying glass etc.) ----
+\RequirePackage{fontawesome5}
+% \lookup or \lookup[what to check] -> a red magnifying glass to revisit after class
+\newcommand{\lookup}[1][]{{\color{red}\faSearch}\ifthenelse{\isempty{#1}}{}{\,\textit{#1}}}
+
+% ---- theorem environments (lightweight, no tcolorbox) ----
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+
+% ---- common shortcut macros (Castel / SeniorMars flavour) ----
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\To}{\longrightarrow}
+\newcommand{\dps}{\displaystyle}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\inner}[1]{\left\langle #1 \right\rangle}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Tr}{tr}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\diag}{diag}
+\let\lt\left
+\let\rt\right
+
+% ---- the inkscape-figure helper (Castel's lecture-notes-2 workflow) ----
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{#1\columnwidth}
+    \import{./figures/}{#2.pdf_tex}
+}
+
+% ---- a quick lecture header command:  \lecture{3}{Monday June 30, 2026}{Eigenvalues} ----
+\newcommand{\lecture}[3]{%
+    \noindent\textbf{Lecture #1}\hfill\emph{#2}\\[-0.3em]
+    \noindent\rule{\textwidth}{0.4pt}\\[0.4em]
+    \noindent{\Large\textbf{#3}}\par\vspace{0.6em}%
+}
+
+\endinput
