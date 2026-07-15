@@ -13,6 +13,7 @@ Summer 2026 — one compiled PDF per lecture, plus the figures/images used in th
 | `2026-07-09-lec4.pdf`  | Lec 4 |
 | `2026-07-13-lec5.pdf`  | Lec 5 |
 | `2026-07-14-lec6.pdf`  | Lec 6 |
+| `2026-07-15-lec7.pdf`  | Lec 7 |
 
 > **Note:** This repo contains lecture notes only. It intentionally does **not**
 > include any homework or lab assignments or solutions.
